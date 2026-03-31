@@ -14,7 +14,7 @@ document.querySelector(".contacto-form").addEventListener("submit", function (e)
   var form = this;
 
   btn.textContent = "¡Mensaje enviado!";
-  btn.style.backgroundColor = "#9fc9a8";
+  btn.style.backgroundColor = "#D4A0A0";
 
   setTimeout(function () {
     btn.textContent = "Enviar";

@@ -5,7 +5,16 @@ document.querySelectorAll('nav a[href^="#"]').forEach(function (link) {
       e.preventDefault();
       target.scrollIntoView({ behavior: "smooth" });
     }
+    // Close mobile menu on link click
+    document.querySelector(".nav-links").classList.remove("active");
+    document.querySelector(".nav-hamburger").classList.remove("active");
   });
+});
+
+// Hamburger menu toggle
+document.querySelector(".nav-hamburger").addEventListener("click", function () {
+  this.classList.toggle("active");
+  document.querySelector(".nav-links").classList.toggle("active");
 });
 
 document.querySelector(".contacto-form").addEventListener("submit", function (e) {

@@ -17,7 +17,8 @@ Sitio institucional de una entidad civil sin fines de lucro (Zárate, Buenos Air
 - `src/data/espacios.js` — lista de espacios (nombre, logo, enlace); logos en `public/espacios/`
 - `src/styles/global.css` — todos los estilos y variables `--color-*` en `:root`
 - `src/scripts/main.js` — menú móvil (Escape / tocar fuera), sección activa en el menú, botón volver arriba, scroll suave, formulario
-- `public/` — SEO e íconos: `favicon.png`, `apple-touch-icon.png`, `icon-512.png`, `og-image.png` (1200x630, vista previa al compartir). Logos servidos en `/`: `logo-centro.webp` (hero) y `logo-centro-chico.webp` (nav/footer) son las versiones livianas. `logo-centro.png` es el original recortado sin márgenes (fuente para regenerar los WebP, el favicon y `og-image.png`); `logo2.png`/`logo.png` son los originales. Logo de la CJEZ: `public/espacios/cjez.webp`
+- `public/` — solo lo que se publica: `favicon.png`, `apple-touch-icon.png`, `icon-512.png`, `og-image.png` (1200x630, vista previa al compartir), `logo-centro.webp` (hero), `logo-centro-chico.webp` (nav/footer) y `espacios/cjez.webp` (logo de la CJEZ).
+- `fuentes/` — originales que NO se publican: `logo2.png` (logo del Centro, 1024 px) y `logo-centro.png` (recortado sin márgenes; base para regenerar los WebP, el favicon y `og-image.png`).
 
 ## Despliegue
 

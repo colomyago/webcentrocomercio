@@ -11,7 +11,8 @@ Sitio web institucional del Centro Del Comercio e Industrias de Zárate, Buenos 
 │   ├── components/             # Una sección por componente
 │   ├── styles/global.css       # Estilos (variables CSS, responsive)
 │   └── scripts/main.js         # Menú, scroll suave y formulario
-├── public/                     # Logos (logo-centro.png recortado, logo2.png original)
+├── public/                     # Logos en WebP, favicon e imagen para compartir
+├── fuentes/                    # Logos originales (no se publican)
 └── .github/workflows/deploy.yml
 ```
 

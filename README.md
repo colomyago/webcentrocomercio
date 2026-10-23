@@ -5,13 +5,14 @@ Sitio web institucional del Centro Del Comercio e Industrias de Zárate, Buenos 
 ## Estructura
 
 ```
-├── index.html     # Página principal
-├── styles.css     # Estilos (variables CSS, responsive)
-├── script.js      # Scroll suave y lógica del formulario
-├── logo.png       # Logo institucional (nav)
-├── logo2.png      # Logo institucional (hero)
-└── .github/
-    └── copilot-instructions.md
+├── src/
+│   ├── pages/index.astro       # Página única
+│   ├── layouts/Layout.astro    # Head, fuentes, CSS y JS
+│   ├── components/             # Una sección por componente
+│   ├── styles/global.css       # Estilos (variables CSS, responsive)
+│   └── scripts/main.js         # Menú, scroll suave y formulario
+├── public/                     # Logos (logo.png nav, logo2.png hero)
+└── .github/workflows/deploy.yml
 ```
 
 ## Secciones activas
@@ -32,10 +33,9 @@ Sitio web institucional del Centro Del Comercio e Industrias de Zárate, Buenos 
 
 ## Tecnologías
 
-- HTML5, CSS3, JavaScript vanilla
+- Astro (sitio estático), CSS3, JavaScript vanilla
 - Google Fonts: Cormorant Garamond + DM Sans
 - Diseño responsive (breakpoint: 768px)
-- Sin dependencias externas
 
 ## Paleta de colores
 
@@ -47,6 +47,14 @@ Sitio web institucional del Centro Del Comercio e Industrias de Zárate, Buenos 
 | Acento | `#2D5C3F` |
 | Fondo suave | `#E8F0EB` |
 
-## Uso
+## Desarrollo
 
-Abrir `index.html` en el navegador. No requiere servidor ni build.
+```
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # genera dist/
+```
+
+## Despliegue
+
+Push a `main` → GitHub Actions compila y publica `dist/` en la rama `deploy` → Hostinger la despliega en `public_html`.

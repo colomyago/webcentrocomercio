@@ -17,17 +17,21 @@ document.querySelector(".nav-hamburger").addEventListener("click", function () {
   document.querySelector(".nav-links").classList.toggle("active");
 });
 
-document.querySelector(".contacto-form").addEventListener("submit", function (e) {
-  e.preventDefault();
-  var btn = this.querySelector(".btn-enviar");
-  var form = this;
+var contactoForm = document.querySelector(".contacto-form");
 
-  btn.textContent = "¡Mensaje enviado!";
-  btn.style.backgroundColor = "#D4A0A0";
+if (contactoForm) {
+  contactoForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var btn = this.querySelector(".btn-enviar");
+    var form = this;
 
-  setTimeout(function () {
-    btn.textContent = "Enviar";
-    btn.style.backgroundColor = "";
-    form.reset();
-  }, 3000);
-});
+    btn.textContent = "¡Mensaje enviado!";
+    btn.style.backgroundColor = "#D4A0A0";
+
+    setTimeout(function () {
+      btn.textContent = "Enviar";
+      btn.style.backgroundColor = "";
+      form.reset();
+    }, 3000);
+  });
+}

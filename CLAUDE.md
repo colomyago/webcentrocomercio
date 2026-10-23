@@ -58,7 +58,7 @@ Los commits del repo usan `colombyago <colomboyago0@gmail.com>`. Si git no tiene
 
 ## Pendiente
 
-- Rediseño visual (hero con imagen, más secciones, color de acento, contacto completo). Se hace sobre esta base Astro.
+Ver `ROADMAP.md` (datos que faltan del cliente, secciones listas para activar e ideas a futuro).
 
 ## Sistema de diseño
 

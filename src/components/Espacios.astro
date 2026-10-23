@@ -1,0 +1,26 @@
+---
+import { espacios } from '../data/espacios.js';
+---
+
+<section id="espacios" class="espacios">
+  <h2>Espacios del Centro</h2>
+  <ul class="espacios-lista">
+    {espacios.map((espacio) => {
+      const Etiqueta = espacio.enlace ? 'a' : 'div';
+      return (
+        <li>
+          <Etiqueta class="espacio-fila" href={espacio.enlace ?? undefined}>
+            <span class="espacio-logo">
+              {espacio.logo ? (
+                <img src={espacio.logo} alt={`Logo de ${espacio.nombre}`} height="88" />
+              ) : (
+                <span class="espacio-logo-provisorio" aria-hidden="true">{espacio.iniciales}</span>
+              )}
+            </span>
+            <h3>{espacio.nombre}</h3>
+          </Etiqueta>
+        </li>
+      );
+    })}
+  </ul>
+</section>

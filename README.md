@@ -11,7 +11,7 @@ Sitio web institucional del Centro Del Comercio e Industrias de Zárate, Buenos 
 │   ├── components/             # Una sección por componente
 │   ├── styles/global.css       # Estilos (variables CSS, responsive)
 │   └── scripts/main.js         # Menú, scroll suave y formulario
-├── public/                     # Logos (logo.png nav, logo2.png hero)
+├── public/                     # Logos (logo-centro.png recortado, logo2.png original)
 └── .github/workflows/deploy.yml
 ```
 
@@ -19,8 +19,9 @@ Sitio web institucional del Centro Del Comercio e Industrias de Zárate, Buenos 
 
 - **Nav** — Logo y enlaces a Nosotros y Contacto
 - **Hero** — Título, descripción y logo institucional
-- **Quiénes somos** — Texto institucional
-- **Contacto** — Ubicación e Instagram
+- **Quiénes somos** — Texto institucional y datos
+- **Espacios** — Mujeres, Gastronomía y Turismo, Jóvenes Empresarios (CJEZ) y Digital
+- **Redes** — Tarjetas a Instagram, X, YouTube y ubicación en Maps
 - **Footer** — Nombre y año
 
 ## Secciones comentadas (listas para activar)
@@ -34,18 +35,19 @@ Sitio web institucional del Centro Del Comercio e Industrias de Zárate, Buenos 
 ## Tecnologías
 
 - Astro (sitio estático), CSS3, JavaScript vanilla
-- Google Fonts: Cormorant Garamond + DM Sans
+- Google Fonts: Archivo + Newsreader
 - Diseño responsive (breakpoint: 768px)
 
 ## Paleta de colores
 
 | Rol | Color |
 |-----|-------|
-| Fondo | `#F9F7F4` |
-| Texto principal | `#1A1A18` |
-| Texto secundario | `#6B6B66` |
-| Acento | `#2D5C3F` |
-| Fondo suave | `#E8F0EB` |
+| Rojo (logo) | `#B01C22` |
+| Rojo oscuro (hover) | `#8B1A1A` |
+| Papel | `#FBFBFA` |
+| Chapa (fondo de Espacios) | `#ECEDEE` |
+| Tinta | `#1D1D1F` |
+| Tinta suave | `#55575A` |
 
 ## Desarrollo
 

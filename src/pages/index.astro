@@ -3,14 +3,18 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import Nosotros from '../components/Nosotros.astro';
-import Contacto from '../components/Contacto.astro';
+import Espacios from '../components/Espacios.astro';
+import Redes from '../components/Redes.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <Layout>
   <Nav />
-  <Hero />
-  <Nosotros />
-  <Contacto />
+  <main id="contenido">
+    <Hero />
+    <Nosotros />
+    <Espacios />
+    <Redes />
+  </main>
   <Footer />
 </Layout>

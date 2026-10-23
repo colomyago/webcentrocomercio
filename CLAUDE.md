@@ -12,10 +12,12 @@ Sitio institucional de una entidad civil sin fines de lucro (Zárate, Buenos Air
 
 - `src/pages/index.astro` — página única; compone las secciones
 - `src/layouts/Layout.astro` — `<head>`, fuentes, CSS global y script
-- `src/components/` — una sección por componente (`Nav`, `Hero`, `Nosotros`, `Contacto`, `Footer`, `Servicios`)
+- `src/components/` — una sección por componente (`Nav`, `Hero`, `Nosotros`, `Espacios`, `Redes`, `Footer`, `Servicios`)
+- `src/data/contacto.js` — WhatsApp (número con código de país, ej. `5493487123456`) y email. Mientras sean `null` no se muestra nada; al completarlos aparecen solas las filas en Redes, el botón flotante de WhatsApp y los datos estructurados.
+- `src/data/espacios.js` — lista de espacios (nombre, logo, enlace); logos en `public/espacios/`
 - `src/styles/global.css` — todos los estilos y variables `--color-*` en `:root`
-- `src/scripts/main.js` — menú hamburguesa, scroll suave, formulario
-- `public/` — logos (`logo.png` nav, `logo2.png` hero), servidos en `/`
+- `src/scripts/main.js` — menú móvil (Escape / tocar fuera), sección activa en el menú, botón volver arriba, scroll suave, formulario
+- `public/` — SEO e íconos: `favicon.png`, `apple-touch-icon.png`, `icon-512.png`, `og-image.png` (1200x630, vista previa al compartir). Logos servidos en `/`: `logo-centro.webp` (hero) y `logo-centro-chico.webp` (nav/footer) son las versiones livianas. `logo-centro.png` es el original recortado sin márgenes (fuente para regenerar los WebP, el favicon y `og-image.png`); `logo2.png`/`logo.png` son los originales. Logo de la CJEZ: `public/espacios/cjez.webp`
 
 ## Despliegue
 
@@ -30,9 +32,12 @@ Nunca commitear `dist/` en `main`. Para publicar: push a `main` y esperar la Act
 ## Convenciones
 
 - Código y textos en español; HTML semántico.
-- Colores solo vía variables CSS (`--color-*`), nunca hardcodeados en reglas.
+- Colores solo vía variables CSS (`--color-*`), nunca hardcodeados en reglas (única excepción: el borde de dientes del hero, un SVG en data URI).
 - Mobile-first; breakpoint principal `max-width: 768px`.
-- Tipografía: Cormorant Garamond (títulos), DM Sans (cuerpo).
+- Tipografía: Archivo expandido, peso 700-800 (títulos, tono de cartel de comercio) y Newsreader (cuerpo).
+- Identidad visual: rojo `#B01C22` del logo, blanco y negro. Idea rectora: chapa esmaltada de comercio + engranaje del logo (plato blanco con el logo y borde de dientes en el hero). Evitar fondos crema, mayúsculas espaciadas y tarjetas idénticas.
+- Los estilos de la barra principal van en `.nav-principal` (no usar el selector `nav` suelto: también hay un `<nav>` en el footer).
+- Márgenes laterales siempre con `--gutter` para que todo quede alineado en la misma columna.
 - Sin CSS ni JS inline: estilos en `global.css`, lógica en `main.js`.
 - Secciones desactivadas se comentan o quedan como componente sin importar; no se borran.
 - Placeholders con formato `[TEXTO_DESCRIPTIVO]`.
@@ -42,6 +47,8 @@ Nunca commitear `dist/` en `main`. Para publicar: push a `main` y esperar la Act
 
 - Instagram: https://www.instagram.com/centrodelcomercio/ (@centrodelcomercio)
 - X: https://x.com/cciz_oficial · YouTube: https://www.youtube.com/@CCIZ-Oficial
+- Espacios del Centro (Mujeres, Gastronomía y Turismo, Digital) y la Cámara de Jóvenes Empresarios de Zárate (CJEZ, gestionada por fuera del Centro). Datos en `src/data/espacios.js`; los tres primeros aún sin logo propio (marca provisoria de iniciales). Logo CJEZ en baja resolución: reemplazar si aparece uno mejor.
+- No publicar información de gestiones anteriores (por ejemplo la Expo-Feria Zárate) por decisión del cliente.
 - Desactivado y listo para activar: Servicios, email de contacto, formulario, botón "Contactanos" del hero, link "Servicios" del nav.
 
 ## Identidad de git

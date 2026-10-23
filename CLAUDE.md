@@ -59,3 +59,49 @@ Los commits del repo usan `colombyago <colomboyago0@gmail.com>`. Si git no tiene
 ## Pendiente
 
 - Rediseño visual (hero con imagen, más secciones, color de acento, contacto completo). Se hace sobre esta base Astro.
+
+## Sistema de diseño
+
+Idea rectora: **chapa esmaltada de comercio + engranaje del logo**. Sobrio, institucional, con carácter de cartel de local.
+
+### Color (variables en `:root` de `global.css`)
+
+| Variable | Valor | Uso |
+|---|---|---|
+| `--color-rojo` | `#B01C22` | Acento único: botones, enlaces, hero |
+| `--color-rojo-oscuro` | `#8B1A1A` | Hover del rojo |
+| `--color-papel` | `#FBFBFA` | Fondo general (blanco apenas cálido, no crema) |
+| `--color-chapa` | `#ECEDEE` | Fondos de sección alternos |
+| `--color-tinta` | `#1D1D1F` | Texto y fondos oscuros |
+| `--color-tinta-suave` | `#55575A` | Texto secundario |
+| `--color-borde` / `--color-borde-oscuro` | tinta/papel al 14 % / 20 % | Líneas finas |
+
+### Tipografía
+
+- Títulos: **Archivo** peso 800, `font-stretch` 112 % (118 % en el título del hero). Tono de cartel.
+- Cuerpo: **Newsreader** 400, 18 px, interlineado 1.65.
+- Sin mayúsculas espaciadas ni etiquetas decorativas sobre los títulos.
+
+### Layout
+
+- Columna única de máximo 1440 px; todo se alinea con `--gutter` (5.5 rem mínimo, centra en pantallas anchas).
+- Secciones con ~7 rem de padding vertical; en móvil (`max-width: 768px`) se reduce.
+- Hero: plato blanco circular con el logo del Centro y borde de dientes de engranaje (SVG en data URI).
+- Espacios: lista de filas (logo en recuadro blanco de 104 px + nombre), no tarjetas idénticas.
+- Flotantes (WhatsApp y volver arriba) a la derecha, más chicos en móvil para no tapar texto.
+
+### Logos de los espacios
+
+Familia de marcas propias, distintas al logo del Centro (no copian su engranaje):
+
+- **Gastronomía y Turismo**: sello postal dentado con tenedor-torre (el puente de Zárate hecho tenedor). Borravino `#8E2447`, tinta `#2A1018`, crema `#FFF1DC`.
+- **Digital**: lámpara de "en vivo" con barras de ecualizador. Magenta `#E0267A`, fondo oscuro `#3A0E22`.
+- **Jóvenes Empresarios (CJEZ)**: logo propio de la agrupación (`public/espacios/cjez.webp`). **Mujeres**: pendiente, lo provee otra persona.
+- Cada logo tiene versión solo símbolo (la que usa la página) y con nombre ("ESPACIO" + nombre en Archivo). SVG en `fuentes/logos-espacios/`, PNG en `fuentes/logos-espacios/png/`.
+- Los nombres de los SVG con texto llevan las letras convertidas a trazos (no dependen de la fuente).
+
+### Reglas al tocar el diseño
+
+- Nuevos colores: agregarlos como variable, no en la regla.
+- Una sola acción roja por pantalla; el resto en tinta o papel.
+- Verificar siempre en móvil (768 px) y con el menú abierto.

@@ -12,7 +12,7 @@ export const espacios = [
     slug: "gastronomia-y-turismo",
     nombre: "Espacio Gastronomía y Turismo",
     iniciales: "GT",
-    logo: null,
+    logo: "/espacios/gastronomia-turismo.svg",
     enlace: null,
   },
   {
@@ -27,7 +27,7 @@ export const espacios = [
     slug: "digital",
     nombre: "Espacio Digital",
     iniciales: "ED",
-    logo: null,
+    logo: "/espacios/digital.svg",
     enlace: null,
   },
 ];

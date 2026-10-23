@@ -48,7 +48,7 @@ Nunca commitear `dist/` en `main`. Para publicar: push a `main` y esperar la Act
 
 - Instagram: https://www.instagram.com/centrodelcomercio/ (@centrodelcomercio)
 - X: https://x.com/cciz_oficial · YouTube: https://www.youtube.com/@CCIZ-Oficial
-- Espacios del Centro (Mujeres, Gastronomía y Turismo, Digital) y la Cámara de Jóvenes Empresarios de Zárate (CJEZ, gestionada por fuera del Centro). Datos en `src/data/espacios.js`; los tres primeros aún sin logo propio (marca provisoria de iniciales). Logo CJEZ en baja resolución: reemplazar si aparece uno mejor.
+- Espacios del Centro (Mujeres, Gastronomía y Turismo, Digital) y la Cámara de Jóvenes Empresarios de Zárate (CJEZ, gestionada por fuera del Centro). Datos en `src/data/espacios.js`. Logos de Gastronomía y Turismo (sello postal con tenedor-torre, borravino) y Digital (lámpara en vivo con ecualizador, magenta): diseño propio en SVG (`public/espacios/*.svg`, solo símbolo; en `fuentes/logos-espacios/` están los SVG con y sin nombre y en `png/` los PNG, con las alternativas en `png/alternativas/`). El logo de Espacio Mujeres lo provee otra persona: hasta que llegue queda la marca provisoria de iniciales. Logo CJEZ en baja resolución: reemplazar si aparece uno mejor.
 - No publicar información de gestiones anteriores (por ejemplo la Expo-Feria Zárate) por decisión del cliente.
 - Desactivado y listo para activar: Servicios, email de contacto, formulario, botón "Contactanos" del hero, link "Servicios" del nav.
 

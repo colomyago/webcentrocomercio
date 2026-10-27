@@ -4,4 +4,8 @@ export const contacto = {
   whatsapp: null,
   whatsappMensaje: "Hola, quiero hacer una consulta al Centro Del Comercio e Industrias de Zárate.",
   email: null,
+  // Sede y atención: aparecen en el footer al completarlos.
+  direccion: null,
+  horario: null,
+  telefono: null,
 };

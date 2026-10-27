@@ -12,11 +12,11 @@ Sitio institucional de una entidad civil sin fines de lucro (Zárate, Buenos Air
 
 - `src/pages/index.astro` — página única; compone las secciones
 - `src/layouts/Layout.astro` — `<head>`, fuentes, CSS global y script
-- `src/components/` — una sección por componente (`Nav`, `Hero`, `Nosotros`, `Espacios`, `Redes`, `Footer`, `Servicios`)
-- `src/data/contacto.js` — WhatsApp (número con código de país, ej. `5493487123456`) y email. Mientras sean `null` no se muestra nada; al completarlos aparecen solas las filas en Redes, el botón flotante de WhatsApp y los datos estructurados.
-- `src/data/espacios.js` — lista de espacios (nombre, logo, enlace); logos en `public/espacios/`
+- `src/components/` — una sección por componente (`Nav`, `Hero`, `Nosotros`, `QueHacemos`, `Espacios`, `Redes`, `Footer`; desactivados: `Servicios`, `Asociate`)
+- `src/data/contacto.js` — WhatsApp (número con código de país, ej. `5493487123456`), email, dirección, horario y teléfono. Mientras sean `null` no se muestra nada; al completarlos aparecen solas las filas en Redes, el botón flotante de WhatsApp, los datos del footer y los datos estructurados.
+- `src/data/espacios.js` — lista de espacios (nombre, logo, descripción, enlace); logos en `public/espacios/`. La descripción y la flecha de la fila aparecen solo si hay dato.
 - `src/styles/global.css` — todos los estilos y variables `--color-*` en `:root`
-- `src/scripts/main.js` — menú móvil (Escape / tocar fuera), sección activa en el menú, botón volver arriba, scroll suave, formulario
+- `src/scripts/main.js` — menú móvil (Escape / tocar fuera), sección activa en el menú, barra de progreso de lectura, botón volver arriba, scroll suave, formulario
 - `public/` — solo lo que se publica: `favicon.png`, `apple-touch-icon.png`, `icon-512.png`, `og-image.png` (1200x630, vista previa al compartir), `logo-centro.webp` (hero), `logo-centro-chico.webp` (nav/footer) y `espacios/cjez.webp` (logo de la CJEZ).
 - `fuentes/` — originales que NO se publican: `logo2.png` (logo del Centro, 1024 px) y `logo-centro.png` (recortado sin márgenes; base para regenerar los WebP, el favicon y `og-image.png`).
 
@@ -33,10 +33,10 @@ Nunca commitear `dist/` en `main`. Para publicar: push a `main` y esperar la Act
 ## Convenciones
 
 - Código y textos en español; HTML semántico.
-- Colores solo vía variables CSS (`--color-*`), nunca hardcodeados en reglas (única excepción: el borde de dientes del hero, un SVG en data URI).
+- Colores solo vía variables CSS (`--color-*`), nunca hardcodeados en reglas. El borde de dientes del hero usa el SVG como máscara y toma el color de la variable.
 - Mobile-first; breakpoint principal `max-width: 768px`.
 - Tipografía: Archivo expandido, peso 700-800 (títulos, tono de cartel de comercio) y Newsreader (cuerpo).
-- Identidad visual: rojo `#B01C22` del logo, blanco y negro. Idea rectora: chapa esmaltada de comercio + engranaje del logo (plato blanco con el logo y borde de dientes en el hero). Evitar fondos crema, mayúsculas espaciadas y tarjetas idénticas.
+- Identidad visual: azul petróleo y gris grafito; el rojo `#B01C22` queda solo en el logo, que no se modifica (al cliente el rojo en la página le recordaba a sangre y tránsito). Idea rectora: chapa esmaltada de comercio + engranaje del logo (plato blanco con el logo y borde de dientes en el hero). Evitar fondos crema, mayúsculas espaciadas y tarjetas idénticas.
 - Los estilos de la barra principal van en `.nav-principal` (no usar el selector `nav` suelto: también hay un `<nav>` en el footer).
 - Márgenes laterales siempre con `--gutter` para que todo quede alineado en la misma columna.
 - Sin CSS ni JS inline: estilos en `global.css`, lógica en `main.js`.
@@ -50,7 +50,7 @@ Nunca commitear `dist/` en `main`. Para publicar: push a `main` y esperar la Act
 - X: https://x.com/cciz_oficial · YouTube: https://www.youtube.com/@CCIZ-Oficial
 - Espacios del Centro (Mujeres, Gastronomía y Turismo, Digital) y la Cámara de Jóvenes Empresarios de Zárate (CJEZ, gestionada por fuera del Centro). Datos en `src/data/espacios.js`. Logos de Gastronomía y Turismo (sello postal con tenedor-torre, borravino) y Digital (lámpara en vivo con ecualizador, magenta): diseño propio en SVG (`public/espacios/*.svg`, solo símbolo; en `fuentes/logos-espacios/` están los SVG con y sin nombre y en `png/` los PNG, con las alternativas en `png/alternativas/`). El logo de Espacio Mujeres lo provee otra persona: hasta que llegue queda la marca provisoria de iniciales. Logo CJEZ en baja resolución: reemplazar si aparece uno mejor.
 - No publicar información de gestiones anteriores (por ejemplo la Expo-Feria Zárate) por decisión del cliente.
-- Desactivado y listo para activar: Servicios, email de contacto, formulario, botón "Contactanos" del hero, link "Servicios" del nav.
+- Desactivado y listo para activar: Servicios, sección Asociate (con su botón en el nav y "Quiero asociarme" en el hero), sello "Desde [AÑO]" del hero (confirmar año de fundación), email de contacto, formulario, botón "Contactanos" del hero, link "Servicios" del nav.
 
 ## Identidad de git
 
@@ -68,13 +68,17 @@ Idea rectora: **chapa esmaltada de comercio + engranaje del logo**. Sobrio, inst
 
 | Variable | Valor | Uso |
 |---|---|---|
-| `--color-rojo` | `#B01C22` | Acento único: botones, enlaces, hero |
-| `--color-rojo-oscuro` | `#8B1A1A` | Hover del rojo |
+| `--color-petroleo` | `#1E3A4A` | Hero, borde de dientes, sección Asociate, hover de Redes |
+| `--color-acento` | `#1F5872` | Acento: botones, enlaces, foco, barra de progreso, volver arriba |
+| `--color-acento-oscuro` | `#163E50` | Hover del acento |
+| `--color-acento-claro` | `#8FBBD0` | Hover de enlaces sobre fondo oscuro |
+| `--color-grafito` | `#2B2D30` | Redes, footer, marca provisoria de espacios |
 | `--color-papel` | `#FBFBFA` | Fondo general (blanco apenas cálido, no crema) |
 | `--color-chapa` | `#ECEDEE` | Fondos de sección alternos |
-| `--color-tinta` | `#1D1D1F` | Texto y fondos oscuros |
+| `--color-tinta` | `#1D1D1F` | Texto |
 | `--color-tinta-suave` | `#55575A` | Texto secundario |
 | `--color-borde` / `--color-borde-oscuro` | tinta/papel al 14 % / 20 % | Líneas finas |
+| `--color-papel-suave` | papel al 72 % | Texto secundario sobre fondo oscuro |
 
 ### Tipografía
 
@@ -86,9 +90,12 @@ Idea rectora: **chapa esmaltada de comercio + engranaje del logo**. Sobrio, inst
 
 - Columna única de máximo 1440 px; todo se alinea con `--gutter` (5.5 rem mínimo, centra en pantallas anchas).
 - Secciones con ~7 rem de padding vertical; en móvil (`max-width: 768px`) se reduce.
-- Hero: plato blanco circular con el logo del Centro y borde de dientes de engranaje (SVG en data URI).
-- Espacios: lista de filas (logo en recuadro blanco de 104 px + nombre), no tarjetas idénticas.
-- Flotantes (WhatsApp y volver arriba) a la derecha, más chicos en móvil para no tapar texto.
+- Hero: plato blanco circular con el logo del Centro (centrado óptico: subido 2,5 % porque el ala pesa arriba), anillo de dientes que gira lento y borde de dientes de engranaje abajo. Entrada suave del texto y el plato.
+- Qué hacemos: tres puntos numerados (01-03) con números grandes, texto tomado de lo que ya dice el sitio.
+- Espacios: lista de filas (logo en recuadro blanco de 104 px + nombre + descripción opcional, línea de acento abajo), no tarjetas idénticas.
+- Menú fijo con barra de progreso de lectura de 3 px en el borde inferior.
+- Flotantes: WhatsApp a la derecha; volver arriba centrado abajo, al 60 % de opacidad (sólido al pasar el mouse, tocarlo o con foco). Más chicos en móvil.
+- Todas las animaciones se apagan con `prefers-reduced-motion`.
 
 ### Logos de los espacios
 
@@ -103,5 +110,6 @@ Familia de marcas propias, distintas al logo del Centro (no copian su engranaje)
 ### Reglas al tocar el diseño
 
 - Nuevos colores: agregarlos como variable, no en la regla.
-- Una sola acción roja por pantalla; el resto en tinta o papel.
+- El rojo es solo del logo: nunca usarlo en fondos, botones ni enlaces.
+- Una sola acción en color de acento por pantalla; el resto en tinta, grafito o papel.
 - Verificar siempre en móvil (768 px) y con el menú abierto.

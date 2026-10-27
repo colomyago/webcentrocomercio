@@ -2,14 +2,18 @@
    Variables
    ============================== */
 :root {
-  --color-rojo: #B01C22;
-  --color-rojo-oscuro: #8B1A1A;
+  --color-petroleo: #1E3A4A;
+  --color-acento: #1F5872;
+  --color-acento-oscuro: #163E50;
+  --color-acento-claro: #8FBBD0;
+  --color-grafito: #2B2D30;
   --color-papel: #FBFBFA;
   --color-chapa: #ECEDEE;
   --color-tinta: #1D1D1F;
   --color-tinta-suave: #55575A;
   --color-borde: rgba(29, 29, 31, 0.14);
   --color-borde-oscuro: rgba(251, 251, 250, 0.2);
+  --color-papel-suave: rgba(251, 251, 250, 0.72);
 
   --fuente-titulo: "Archivo", sans-serif;
   --fuente-cuerpo: "Newsreader", Georgia, serif;
@@ -77,7 +81,7 @@ section[id] {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--color-rojo);
+  outline: 2px solid var(--color-acento);
   outline-offset: 4px;
 }
 
@@ -136,18 +140,51 @@ button:focus-visible {
   bottom: -6px;
   width: 100%;
   height: 2px;
-  background-color: var(--color-rojo);
+  background-color: var(--color-acento);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s;
 }
 
 .nav-links a:hover {
-  color: var(--color-rojo);
+  color: var(--color-acento);
 }
 
 .nav-links a:hover::after {
   transform: scaleX(1);
+}
+
+/* Botón "Asociate" del menú (desactivado hasta tener cómo asociarse) */
+.nav-links a.btn-nav {
+  padding: 0.7rem 1.4rem;
+  font-family: var(--fuente-titulo);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-papel);
+  background-color: var(--color-acento);
+  border-radius: 2px;
+  transition: background-color 0.3s;
+}
+
+.nav-links a.btn-nav:hover {
+  color: var(--color-papel);
+  background-color: var(--color-acento-oscuro);
+}
+
+.nav-links a.btn-nav::after {
+  display: none;
+}
+
+/* Barra de progreso de lectura: main.js actualiza --progreso al desplazarse */
+.barra-progreso {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-acento);
+  transform: scaleX(var(--progreso, 0));
+  transform-origin: left;
 }
 
 /* ==============================
@@ -161,8 +198,12 @@ button:focus-visible {
   min-height: min(78vh, 760px);
   padding: 5rem var(--gutter) 4.5rem;
   overflow: hidden;
-  background-color: var(--color-rojo);
+  background-color: var(--color-petroleo);
   color: var(--color-papel);
+}
+
+.hero-texto {
+  animation: entrar 0.8s ease-out both;
 }
 
 .hero h1 {
@@ -196,14 +237,14 @@ button:focus-visible {
   font-family: var(--fuente-titulo);
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--color-rojo);
+  color: var(--color-petroleo);
   background-color: var(--color-papel);
   border-radius: 2px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .btn-hero:hover {
-  background-color: var(--color-tinta);
+  background-color: var(--color-grafito);
   color: var(--color-papel);
 }
 
@@ -224,29 +265,86 @@ button:focus-visible {
   outline-color: var(--color-papel);
 }
 
-/* Chapa: el logo sobre un plato blanco liso */
-.hero-placa {
+/* Chapa: el logo sobre un plato blanco, rodeado por un anillo de dientes que gira lento */
+.hero-chapa {
+  position: relative;
   justify-self: center;
+  width: min(38vw, 500px);
+  aspect-ratio: 1;
+  animation: entrar 0.8s 0.15s ease-out both;
+}
+
+.hero-engranaje {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-engranaje circle {
+  fill: none;
+  stroke: var(--color-borde-oscuro);
+  stroke-width: 20;
+  stroke-dasharray: 5 5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: girar 90s linear infinite;
+}
+
+.hero-placa {
+  position: absolute;
+  inset: 7%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: min(36vw, 480px);
-  aspect-ratio: 1;
   border-radius: 50%;
   background-color: var(--color-papel);
 }
 
+/* Centrado óptico: el ala del logo pesa arriba, así que se sube un poco para que el engranaje quede al medio */
 .hero-placa img {
+  position: relative;
+  top: -2.5%;
   width: auto;
-  height: 74%;
+  height: 68%;
 }
 
-/* Borde de dientes de engranaje que baja del hero (color fijo: no admite var() en data URI) */
+/* Sello con el año de fundación (desactivado hasta confirmar el dato) */
+.hero-sello {
+  position: absolute;
+  left: 0;
+  bottom: 6%;
+  padding: 0.6rem 1.1rem;
+  font-family: var(--fuente-titulo);
+  font-size: 1.05rem;
+  font-weight: 800;
+  font-stretch: 118%;
+  line-height: 1;
+  color: var(--color-petroleo);
+  background-color: var(--color-papel);
+  border: 2px solid var(--color-petroleo);
+  box-shadow: 0 0 0 4px var(--color-papel);
+}
+
+/* Borde de dientes de engranaje que baja del hero: la forma va en la máscara, el color en la variable */
 .hero-dientes {
   height: 24px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='24' viewBox='0 0 64 24'%3E%3Cpath fill='%23B01C22' d='M0 0H64V8H56L52 24H12L8 8H0Z'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-  background-size: 64px 24px;
+  background-color: var(--color-petroleo);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='24' viewBox='0 0 64 24'%3E%3Cpath d='M0 0H64V8H56L52 24H12L8 8H0Z'/%3E%3C/svg%3E") repeat-x 0 0 / 64px 24px;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='24' viewBox='0 0 64 24'%3E%3Cpath d='M0 0H64V8H56L52 24H12L8 8H0Z'/%3E%3C/svg%3E") repeat-x 0 0 / 64px 24px;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
 }
 
 /* ==============================
@@ -320,8 +418,13 @@ button:focus-visible {
   height: 100%;
   padding: 1.25rem 1.75rem 1.25rem 1.25rem;
   background-color: var(--color-papel);
-  border-left: 5px solid var(--color-rojo);
+  border-bottom: 4px solid var(--color-acento);
   transition: background-color 0.3s, color 0.3s;
+}
+
+.espacio-texto {
+  flex: 1;
+  min-width: 0;
 }
 
 .espacio-fila h3 {
@@ -331,8 +434,25 @@ button:focus-visible {
   line-height: 1.2;
 }
 
+.espacio-descripcion {
+  margin-top: 0.35rem;
+  font-size: 1rem;
+  line-height: 1.45;
+  opacity: 0.75;
+}
+
+/* Flecha: solo en las filas con enlace */
+.espacio-flecha {
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+a.espacio-fila:hover .espacio-flecha {
+  transform: translateX(6px);
+}
+
 a.espacio-fila:hover {
-  background-color: var(--color-rojo);
+  background-color: var(--color-acento);
   color: var(--color-papel);
 }
 
@@ -359,18 +479,116 @@ a.espacio-fila:focus-visible {
   object-fit: contain;
 }
 
+/* Marca provisoria de iniciales mientras no llega el logo */
+.espacio-logo-sin-imagen {
+  width: 104px;
+  background-color: var(--color-grafito);
+  border-color: var(--color-grafito);
+}
+
 .espacio-logo-provisorio {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 72px;
-  height: 72px;
-  border: 2px solid var(--color-rojo);
-  border-radius: 50%;
   font-family: var(--fuente-titulo);
-  font-size: 1.4rem;
+  font-size: 1.9rem;
   font-weight: 800;
-  color: var(--color-rojo);
+  font-stretch: 118%;
+  color: var(--color-papel);
+}
+
+/* ==============================
+   Qué hacemos
+   ============================== */
+.que-hacemos {
+  padding: 0 var(--gutter) 7rem;
+}
+
+.que-hacemos h2 {
+  margin-bottom: 3rem;
+}
+
+.que-hacemos-lista {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 2px solid var(--color-grafito);
+  list-style: none;
+}
+
+.que-hacemos-lista li {
+  padding: 2rem 2rem 2.5rem 0;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.que-hacemos-numero {
+  display: block;
+  margin-bottom: 1.25rem;
+  font-family: var(--fuente-titulo);
+  font-size: 3.5rem;
+  font-weight: 800;
+  font-stretch: 118%;
+  line-height: 1;
+  color: var(--color-acento);
+}
+
+.que-hacemos-lista h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-stretch: 100%;
+}
+
+.que-hacemos-lista p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-tinta-suave);
+}
+
+/* ==============================
+   Asociate (desactivada hasta tener beneficios y forma de contacto)
+   ============================== */
+.asociate {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 5rem;
+  padding: 7rem var(--gutter);
+  background-color: var(--color-petroleo);
+  color: var(--color-papel);
+}
+
+.asociate h2 {
+  max-width: 14ch;
+  margin-bottom: 1.25rem;
+}
+
+.asociate-texto > p {
+  max-width: 30rem;
+  margin-bottom: 2.25rem;
+  color: rgba(251, 251, 250, 0.85);
+}
+
+.asociate-beneficios {
+  border-top: 1px solid var(--color-borde-oscuro);
+}
+
+.asociate-beneficios li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--color-borde-oscuro);
+  font-family: var(--fuente-titulo);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.asociate-beneficios svg {
+  position: relative;
+  top: 3px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ==============================
@@ -426,7 +644,7 @@ a.espacio-fila:focus-visible {
    ============================== */
 .redes {
   padding: 7rem var(--gutter);
-  background-color: var(--color-tinta);
+  background-color: var(--color-grafito);
   color: var(--color-papel);
 }
 
@@ -453,7 +671,7 @@ a.espacio-fila:focus-visible {
 
 .red-fila {
   display: grid;
-  grid-template-columns: 32px 1fr auto;
+  grid-template-columns: 32px 1fr auto 24px;
   align-items: center;
   gap: 1.75rem;
   margin: 0 -1.5rem;
@@ -462,7 +680,7 @@ a.espacio-fila:focus-visible {
 }
 
 .red-fila:hover {
-  background-color: var(--color-rojo);
+  background-color: var(--color-petroleo);
 }
 
 .red-fila:focus-visible {
@@ -504,6 +722,19 @@ a.espacio-fila:focus-visible {
 
 .red-fila:hover .red-usuario {
   color: var(--color-papel);
+}
+
+.red-flecha {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.3s;
+}
+
+.red-fila:hover .red-flecha {
+  transform: translate(3px, -3px);
 }
 
 /* Formulario (desactivado) */
@@ -572,17 +803,18 @@ a.espacio-fila:focus-visible {
    Footer
    ============================== */
 footer {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1.25rem 2rem;
-  padding: 2.25rem var(--gutter);
-  background-color: var(--color-tinta);
+  gap: 1.75rem 3rem;
+  padding: 3rem var(--gutter) 2.25rem;
+  background-color: var(--color-grafito);
   border-top: 1px solid var(--color-borde-oscuro);
-  color: rgba(251, 251, 250, 0.72);
+  color: var(--color-papel-suave);
 }
 
 .footer-marca {
+  flex: 1 1 18rem;
   display: flex;
   align-items: center;
   gap: 0.85rem;
@@ -600,8 +832,8 @@ footer {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background-color: var(--color-papel);
 }
@@ -609,6 +841,23 @@ footer {
 .footer-placa img {
   width: auto;
   height: 34px;
+}
+
+/* Sede y atención: cada dato aparece solo cuando está cargado en contacto.js */
+.footer-datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 3rem;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.footer-datos dt {
+  margin-bottom: 0.2rem;
+  font-family: var(--fuente-titulo);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-papel);
 }
 
 .footer-links {
@@ -627,7 +876,7 @@ footer {
 }
 
 .footer-links a:hover {
-  color: #E26A6F;
+  color: var(--color-acento-claro);
 }
 
 footer a:focus-visible {
@@ -635,7 +884,7 @@ footer a:focus-visible {
 }
 
 .footer-copy {
-  grid-column: 1 / -1;
+  flex-basis: 100%;
   padding-top: 1.25rem;
   border-top: 1px solid var(--color-borde-oscuro);
   font-size: 0.9rem;
@@ -663,7 +912,7 @@ footer a:focus-visible {
 }
 
 .nav-links a[aria-current] {
-  color: var(--color-rojo);
+  color: var(--color-acento);
 }
 
 .nav-links a[aria-current]::after {
@@ -689,42 +938,54 @@ footer a:focus-visible {
   height: 60px;
   border-radius: 50%;
   color: var(--color-papel);
-  background-color: var(--color-tinta);
+  background-color: var(--color-grafito);
   box-shadow: 0 0 0 3px var(--color-papel);
   transition: background-color 0.3s;
 }
 
 .boton-whatsapp:hover {
-  background-color: var(--color-rojo);
+  background-color: var(--color-petroleo);
 }
 
 .boton-whatsapp:focus-visible {
   outline-offset: 6px;
 }
 
+/* Volver arriba: centrado abajo y semitransparente para no tapar el texto; sólido al usarlo */
 .volver-arriba {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  z-index: 90;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   color: var(--color-papel);
-  background-color: var(--color-rojo);
+  background-color: var(--color-acento);
+  box-shadow: 0 0 0 3px var(--color-papel);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px);
+  transform: translate(-50%, 8px);
   transition: opacity 0.3s, transform 0.3s, visibility 0.3s, background-color 0.3s;
 }
 
 .volver-arriba.visible {
-  opacity: 1;
+  opacity: 0.6;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateX(-50%);
+}
+
+.volver-arriba.visible:hover,
+.volver-arriba.visible:focus-visible,
+.volver-arriba.visible:active {
+  opacity: 1;
 }
 
 .volver-arriba:hover {
-  background-color: var(--color-rojo-oscuro);
+  background-color: var(--color-acento-oscuro);
 }
 
 .volver-arriba svg {
@@ -792,6 +1053,10 @@ body.menu-abierto {
   .espacios-lista {
     grid-template-columns: 1fr;
   }
+
+  .asociate {
+    gap: 3rem;
+  }
 }
 
 /* ==============================
@@ -858,10 +1123,14 @@ body.menu-abierto {
     padding: 2.5rem var(--margen) 3rem;
   }
 
-  .hero-placa {
+  .hero-chapa {
     order: -1;
-    justify-self: center;
-    width: min(62vw, 260px);
+    width: min(70vw, 300px);
+  }
+
+  .hero-sello {
+    padding: 0.45rem 0.8rem;
+    font-size: 0.85rem;
   }
 
   .hero h1 {
@@ -879,7 +1148,38 @@ body.menu-abierto {
     padding: 4rem var(--margen);
   }
 
+  .que-hacemos {
+    padding: 0 var(--margen) 4rem;
+  }
+
+  .que-hacemos h2 {
+    margin-bottom: 2rem;
+  }
+
+  .que-hacemos-lista {
+    grid-template-columns: 1fr;
+  }
+
+  .que-hacemos-lista li {
+    padding: 1.5rem 0 1.75rem;
+  }
+
+  .que-hacemos-numero {
+    margin-bottom: 0.75rem;
+    font-size: 2.6rem;
+  }
+
+  .que-hacemos-lista h3 {
+    font-size: 1.25rem;
+  }
+
+  .asociate {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
   .espacios,
+  .asociate,
   .redes {
     padding: 4rem var(--margen);
   }
@@ -904,14 +1204,20 @@ body.menu-abierto {
     max-width: 136px;
   }
 
+  .espacio-logo-sin-imagen {
+    width: 84px;
+  }
+
   .espacio-logo-provisorio {
-    width: 58px;
-    height: 58px;
-    font-size: 1.15rem;
+    font-size: 1.5rem;
   }
 
   .espacio-fila h3 {
     font-size: 1.1rem;
+  }
+
+  .espacio-descripcion {
+    font-size: 0.95rem;
   }
 
   .servicios {
@@ -955,9 +1261,12 @@ body.menu-abierto {
     font-size: 1.05rem;
   }
 
+  .red-flecha {
+    display: none;
+  }
+
   footer {
-    grid-template-columns: 1fr;
-    padding: 1.75rem var(--margen);
+    padding: 2.5rem var(--margen) 1.75rem;
   }
 
   .footer-links {
@@ -976,8 +1285,9 @@ body.menu-abierto {
   }
 
   .volver-arriba {
-    width: 42px;
-    height: 42px;
+    bottom: 1rem;
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -988,5 +1298,6 @@ body.menu-abierto {
 
   * {
     transition: none !important;
+    animation: none !important;
   }
 }

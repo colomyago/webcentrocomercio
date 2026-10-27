@@ -72,15 +72,30 @@ if ("IntersectionObserver" in window) {
   });
 }
 
-// Botón para volver arriba: aparece al bajar del hero
+// Al desplazarse: barra de progreso de lectura y botón para volver arriba (aparece al bajar del hero)
 var volverArriba = document.querySelector(".volver-arriba");
+var barraProgreso = document.querySelector(".barra-progreso");
+var cuadroPendiente = false;
 
-function actualizarVolverArriba() {
+function actualizarDesplazamiento() {
+  cuadroPendiente = false;
+  var recorrido = document.documentElement.scrollHeight - window.innerHeight;
+  var progreso = recorrido > 0 ? Math.min(window.scrollY / recorrido, 1) : 0;
+  barraProgreso.style.setProperty("--progreso", progreso);
   volverArriba.classList.toggle("visible", window.scrollY > 700);
 }
 
-window.addEventListener("scroll", actualizarVolverArriba, { passive: true });
-actualizarVolverArriba();
+window.addEventListener(
+  "scroll",
+  function () {
+    if (cuadroPendiente) return;
+    cuadroPendiente = true;
+    requestAnimationFrame(actualizarDesplazamiento);
+  },
+  { passive: true }
+);
+window.addEventListener("resize", actualizarDesplazamiento);
+actualizarDesplazamiento();
 
 var contactoForm = document.querySelector(".contacto-form");
 
